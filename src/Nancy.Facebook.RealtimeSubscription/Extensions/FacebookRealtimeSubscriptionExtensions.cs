@@ -34,7 +34,7 @@
             }
         }
 
-        public static object AsFacebookPostSubscription(this IResponseFormatter responseFormatter, string appSecret, Func<object, object> callback, bool throwsException = false)
+        public static object AsFacebookPostSubscription(this IResponseFormatter responseFormatter, string appSecret, Func<object, object> callback, bool throwsException = false, Type resultType = null, Func<string, Type, object> jsonDeserializer = null)
         {
             var request = responseFormatter.Context.Request;
             var requestBodyString = new StreamReader(request.Body).ReadToEnd();
@@ -44,9 +44,9 @@
                 var result = FacebookClient.VerifyPostSubscription(
                     request.Headers[FacebookClient.SubscriptionXHubSigntureRequestHeaderKey].FirstOrDefault(),
                     requestBodyString,
-                    null,
+                    resultType,
                     appSecret,
-                    null);
+                    jsonDeserializer ?? SimpleJson.DeserializeObject);
 
                 if (callback != null)
                 {
@@ -60,6 +60,26 @@
                 if (throwsException) throw;
                 return new Response { StatusCode = HttpStatusCode.NotFound };
             }
+        }
+
+        public static object AsFacebookPostSubscription<T>(this IResponseFormatter responseFormatter, string appSecret, Func<T, object> callback, bool throwsException = false, Func<string, Type, object> jsonDeserializer = null)
+        {
+            return responseFormatter.AsFacebookPostSubscription(
+                appSecret,
+                x =>
+                {
+                    var y = (T)x;
+
+                    if (callback != null)
+                    {
+                        return callback(y);
+                    }
+
+                    return HttpStatusCode.OK;
+                },
+                throwsException,
+                typeof(T),
+                jsonDeserializer);
         }
     }
 }
