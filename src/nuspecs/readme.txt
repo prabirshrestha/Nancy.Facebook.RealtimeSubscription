@@ -22,6 +22,7 @@ same as in Facebook C# SDK.
 To view the notifications received navigate to `/facebook/subscriptions/show`.
 
 ```c#
+using System.Collections.Generic;
 using Nancy;
 using Nancy.Facebook.RealtimeSubscription;
 
@@ -29,9 +30,12 @@ public class HelloWorldFacebookRealtimeSubscriptionModule : NancyModule {
     
     private static readonly IList<string> Notifications = new List<string>();
 
-    public class HelloWorldFacebookRealtimeSubscriptionModule()
+    public HelloWorldFacebookRealtimeSubscriptionModule()
         : base("/facebook/subscriptions") {
         
+        const string appSecret = "...";
+        const string verifyToken = "...";
+
         Get["/show"] =
             _ => string.Join(",", Notifications);
 
@@ -57,12 +61,13 @@ By default `SubscribeToFacebookRealtimeUpdates` will register both GET and POST 
 `parameter` in the below example is same as the route parameter given by Nancy.
 
 ```c#
+using System.Collections.Generic;
 using Nancy;
 using Nancy.Facebook.RealtimeSubscription;
 
 public class MultipleFacebookRealtimeSubscriptionModule : NancyModule {
 
-    public class MultipleFacebookRealtimeSubscriptionModule()
+    public MultipleFacebookRealtimeSubscriptionModule()
         : base("/facebook/subscriptions") {
 
         const string appSecret = "...";

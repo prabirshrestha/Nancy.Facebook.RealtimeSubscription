@@ -92,28 +92,28 @@ namespace('nuget', function () {
 
     })
 
-    // namespace('push', function () {
+    namespace('push', function () {
 
-    //     desc('Push nuget package to nuget.org')
-    //     task('nuget', function(apiKey) {
-    //         nuget.push({
-    //             apiKey: apiKey,
-    //             package: path.join(config.rootPath, 'Dist/NuGet/Facebook.' + config.fileVersion + '.nupkg')
-    //         })
-    //     }, { async: true })
+        desc('Push nuget package to nuget.org')
+        task('nuget', function(apiKey) {
+            nuget.push({
+                apiKey: apiKey,
+                package: path.join(config.rootPath, 'dist/nuget/Nancy.Facebook.RealtimeSubscription.' + config.fileVersion + '.nupkg')
+            })
+        }, { async: true })
 
-    //     desc('Push nuget package to symbolsource')
-    //     task('symbolsource', function(apiKey) {
-    //         nuget.push({
-    //             apiKey: apiKey,
-    //             package: path.join(config.rootPath, 'Dist/SymbolSource/Facebook.' + config.fileVersion + '.nupkg'),
-    //             source: nuget.sources.symbolSource
-    //         })
-    //     }, { async: true })
+        desc('Push nuget package to symbolsource')
+        task('symbols', function(apiKey) {
+            nuget.push({
+                apiKey: apiKey,
+                package: path.join(config.rootPath, 'dist/symbols/Nancy.Facebook.RealtimeSubscription.' + config.fileVersion + '.nupkg'),
+                source: nuget.sources.symbolSource
+            })
+        }, { async: true })
 
-    // })
+    })
 
-    desc('Create NuGet and SymbolSource pacakges')
+    desc('Create NuGet pacakges')
     task('pack', ['nuget:pack:all'])
 
 })
