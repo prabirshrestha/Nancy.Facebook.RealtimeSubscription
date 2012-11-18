@@ -98,7 +98,7 @@ namespace('nuget', function () {
         task('nuget', function(apiKey) {
             nuget.push({
                 apiKey: apiKey,
-                package: path.join(config.rootPath, 'dist/nuget/Nancy.Facebook.RealtimeSubscription.' + config.fileVersion + '.nupkg')
+                package: path.join(config.rootPath, 'dist/nuget/Nancy.Facebook.RealtimeSubscription.' + config.version + '.nupkg')
             })
         }, { async: true })
 
@@ -106,7 +106,7 @@ namespace('nuget', function () {
         task('symbols', function(apiKey) {
             nuget.push({
                 apiKey: apiKey,
-                package: path.join(config.rootPath, 'dist/symbols/Nancy.Facebook.RealtimeSubscription.' + config.fileVersion + '.nupkg'),
+                package: path.join(config.rootPath, 'dist/symbols/Nancy.Facebook.RealtimeSubscription.' + config.version + '.nupkg'),
                 source: nuget.sources.symbolSource
             })
         }, { async: true })
