@@ -1,0 +1,25 @@
+<?xml version='1.0'?>
+<package xmlns='http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd'>
+    <metadata>
+        <id>Nancy.Facebook.RealtimeSubscription</id>
+        <version>${version}</version>
+        <title/>
+        <authors>Prabir Shrestha</authors>
+        <owners>Prabir Shrestha</owners>
+        <description>Facebook Realtime Subscription API helper for Nancy</description>
+        <language>en-US</language>
+        <licenseUrl>https://raw.github.com/prabirshrestha/Nancy.Facebook.RealtimeSubscription/master/LICENSE</licenseUrl>
+        <projectUrl>https://raw.github.com/prabirshrestha/Nancy.Facebook.RealtimeSubscription</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <tags>Facebook fb Nancy</tags>
+        <dependencies>
+           <dependency id="Nancy" version="0.13.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\..\LICENSE" target = "LICENSE" />
+        <file src="readme.txt" target = "readme.txt" />
+        <file src="..\Nancy.Facebook.RealtimeSubscription\bin\Release\Nancy.Facebook.RealtimeSubscription.dll" target = "lib\net40" />
+        <file src="..\Nancy.Facebook.RealtimeSubscription\bin\Release\Nancy.Facebook.RealtimeSubscription.xml" target = "lib\net40" />
+    </files>
+</package>
