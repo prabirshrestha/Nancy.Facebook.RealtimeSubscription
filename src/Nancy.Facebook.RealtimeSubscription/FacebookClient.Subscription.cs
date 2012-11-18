@@ -76,7 +76,7 @@ namespace Nancy.Facebook.RealtimeSubscription
         /// <param name="requestBody">The request body.</param>
         /// <param name="resultType">The result type.</param>
         /// <param name="appSecret">The App secret.</param>
-        public virtual object VerifyPostSubscription(string requestHttpXHubSignature, string requestBody, Type resultType, string appSecret, Func<string, Type, object> deserializeJson)
+        public static object VerifyPostSubscription(string requestHttpXHubSignature, string requestBody, Type resultType, string appSecret, Func<string, Type, object> deserializeJson)
         {
             // httpXHubSignature looks somewhat like "sha1=4594ae916543cece9de48e3289a5ab568f514b6a"
 
