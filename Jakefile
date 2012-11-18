@@ -26,7 +26,9 @@ assemblyInfo.setDefaults({
     language: 'c#'
 })
 
-task('default', ['build'])
+directory('dist/')
+
+task('default', ['build', 'nuget:pack'])
 
 desc('Build')
 task('build', ['assemblyInfo'], function () {
@@ -61,3 +63,57 @@ task('assemblyInfo', function () {
         }
     })
 }, { async: true })
+
+directory('dist/nuget/', ['dist/'])
+directory('dist/symbols/', ['dist/'])
+
+namespace('nuget', function () {
+
+    namespace('pack', function () {
+
+        task('nuget', ['dist/nuget/', 'build'], function () {
+            nuget.pack({
+                nuspec: 'src/nuspecs/Nancy.Facebook.RealtimeSubscription.nuspec',
+                version: config.version,
+                outputDirectory: 'dist/nuget/'
+            })
+        }, { async: true })
+
+
+        task('symbolsource', ['dist/symbols/', 'build'], function () {
+            nuget.pack({
+                nuspec: 'src/nuspecs/Nancy.Facebook.RealtimeSubscription.symbols.nuspec',
+                version: config.version,
+                outputDirectory: 'dist/symbols/'
+            })
+        }, { async: true })
+
+        task('all', ['nuget:pack:nuget', 'nuget:pack:symbolsource'])
+
+    })
+
+    // namespace('push', function () {
+
+    //     desc('Push nuget package to nuget.org')
+    //     task('nuget', function(apiKey) {
+    //         nuget.push({
+    //             apiKey: apiKey,
+    //             package: path.join(config.rootPath, 'Dist/NuGet/Facebook.' + config.fileVersion + '.nupkg')
+    //         })
+    //     }, { async: true })
+
+    //     desc('Push nuget package to symbolsource')
+    //     task('symbolsource', function(apiKey) {
+    //         nuget.push({
+    //             apiKey: apiKey,
+    //             package: path.join(config.rootPath, 'Dist/SymbolSource/Facebook.' + config.fileVersion + '.nupkg'),
+    //             source: nuget.sources.symbolSource
+    //         })
+    //     }, { async: true })
+
+    // })
+
+    desc('Create NuGet and SymbolSource pacakges')
+    task('pack', ['nuget:pack:all'])
+
+})
