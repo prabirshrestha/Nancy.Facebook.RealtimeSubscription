@@ -34,7 +34,7 @@
             }
         }
 
-        public static object AsFacebookPostSubscription(this IResponseFormatter responseFormatter, string appSecret, Func<object, object> callback, bool throwsException = false, Type resultType = null, Func<string, Type, object> jsonDeserializer = null)
+        public static object AsFacebookPostSubscription(this IResponseFormatter responseFormatter, string appSecret, Func<object, object> callback, bool throwException = false, Type resultType = null, Func<string, Type, object> jsonDeserializer = null)
         {
             var request = responseFormatter.Context.Request;
             var requestBodyString = new StreamReader(request.Body).ReadToEnd();
@@ -57,12 +57,12 @@
             }
             catch (Exception)
             {
-                if (throwsException) throw;
+                if (throwException) throw;
                 return new Response { StatusCode = HttpStatusCode.NotFound };
             }
         }
 
-        public static object AsFacebookPostSubscription<T>(this IResponseFormatter responseFormatter, string appSecret, Func<T, object> callback, bool throwsException = false, Func<string, Type, object> jsonDeserializer = null)
+        public static object AsFacebookPostSubscription<T>(this IResponseFormatter responseFormatter, string appSecret, Func<T, object> callback, bool throwException = false, Func<string, Type, object> jsonDeserializer = null)
         {
             return responseFormatter.AsFacebookPostSubscription(
                 appSecret,
@@ -77,7 +77,7 @@
 
                     return HttpStatusCode.OK;
                 },
-                throwsException,
+                throwException,
                 typeof(T),
                 jsonDeserializer);
         }
