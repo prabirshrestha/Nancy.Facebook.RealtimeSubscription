@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\Responses\FacebookRealtimeSubscriptionExtensions.cs" />
+    <Compile Include="FacebookRealtimeSubscriptionExtensions.cs" />
     <Compile Include="FacebookClient.Subscription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleJson.cs" />
