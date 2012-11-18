@@ -53,6 +53,7 @@ this.SubscribeToFacebookRealtimeUpdates(
     {
 
     });
+```    
 
 ## Multiple subscription in the same NancyModule
 
