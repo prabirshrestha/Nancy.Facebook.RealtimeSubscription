@@ -1,4 +1,4 @@
-﻿namespace Nancy.Facebook.RealtimeSubscription.Extensions
+﻿namespace Nancy.Facebook.RealtimeSubscription
 {
     using System;
     using System.IO;
